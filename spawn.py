@@ -98,15 +98,3 @@ class Processes(object):
     def get_number(self):
         pass
 
-
-
-if __name__ == '__main__':
-    parser = args()
-    parser = parser.parse_args(sys.argv[1:])[0]
-    if parser.procs:
-        #p = Processes(parser.procs, count, [20])
-        p = Processes(parser.procs, fib, [10])
-        p.run()
-    else:
-        print "Error: invalid arguments"
-        sys.exit(1)

@@ -56,34 +56,4 @@ class MasterProcess(object):
                 os.system("kill -9 {0}".format(i))
         os.remove('/etc/ipc/pids.txt')
     
-
-
-# a method to handle the incoming serversocket connections and manage them
-# n is the number of connections this particular serversocket can handle
-def handle_connections(serversocket, n):
-    connections = []
-    while len(connections) < n:
-        (client, addr) = serversocket.accept()
-        connections.append(client)
-        data = client.recv(10000)
-        print data
-        
-    sys.exit(0)
-    
  
-
-
-if __name__ == '__main__':
-    parser = setup_parser()
-    parser = parser.parse_args(sys.argv[1:])[0]
-    if not hasattr(parser, 'host') and not hasattr(parser, 'port'):
-        sys.exit(1)
-    else:
-        #serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        #serversocket.bind( (parser.host, parser.port) )
-        master = MasterProcess( parser.host, parser.port )
-        f = open('sock.txt', 'w')
-        f.write(parser.host + '\n' + str(parser.port))
-        f.close()
-        master.setup()
-        master.handle_connections() 
