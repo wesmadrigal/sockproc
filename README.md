@@ -7,17 +7,17 @@
 <br>
 <label>Example:
 <code>from sockproc import serversock<br>
-      # host and port for the master socket
-      master = serversock.MasterProcess('127.0.0.1', 8000)
-      master.setup()
-      master.handle_connections()
 </code>
+<code># host and port for the master socket</code><br>
+<code>master = serversock.MasterProcess('127.0.0.1', 8000)</code><br>
+<code>master.setup()</code><br>
+<code>master.handle_connections()</code><br>
+
 <br>
 <p>In a separate interpreter:
 <br>
-<code>from sockproc import spawn<br>
-      procs = spawn.Processes(2, func, args)
-      procs.run()
-</code>
+<code>from sockproc import spawn</code>
+<code>procs = spawn.Processes(2, func, args)</code><br>
+<code>procs.run()</code>
 </body>
 </html>
