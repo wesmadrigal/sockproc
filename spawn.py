@@ -7,35 +7,6 @@ import random
 import time
 import json
 
-def master():
-    pid = os.getpid()
-    return pid
-
-master_pid = master()
-
-def args():
-    parser = optparse.OptionParser()
-    parser.add_option('-p', '--processes', action="store", type="int", dest="procs")
-    return parser
-
-def count(n):
-    c = 0
-    start = time.time()
-    while time.time() < start + n:
-        c += 1
-    return c
-
-def fib(n):
-    if n < 2:
-        return n
-    else:
-        return fib(n-1) + fib(n-2)
-
-def fact(n):
-    if n < 2:
-        return n
-    else:
-        return n * fact(n-1)
 
 
 class Processes(object):
@@ -97,4 +68,36 @@ class Processes(object):
 
     def get_number(self):
         pass
+
+
+def master():
+    pid = os.getpid()
+    return pid
+
+master_pid = master()
+
+def args():
+    parser = optparse.OptionParser()
+    parser.add_option('-p', '--processes', action="store", type="int", dest="procs")
+    return parser
+
+def count(n):
+    c = 0
+    start = time.time()
+    while time.time() < start + n:
+        c += 1
+    return c
+
+def fib(n):
+    if n < 2:
+        return n
+    else:
+        return fib(n-1) + fib(n-2)
+
+def fact(n):
+    if n < 2:
+        return n
+    else:
+        return n * fact(n-1)
+
 
