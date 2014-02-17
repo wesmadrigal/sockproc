@@ -25,7 +25,6 @@ class Processes(object):
     def run(self):
         for i in range(self.children):
             try:
-                #while os.getpid() != self.master:
                 start = time.time()
                 child = os.fork()
                 pid = os.getpid()
@@ -34,8 +33,6 @@ class Processes(object):
                         f.write(str(pid)+'\n')
                 
                 
-                #child = os.forkpty()
-
                 if child != 0:
                     sys.exit(0)
                 childsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -49,7 +46,6 @@ class Processes(object):
                 end = time.time() - start
                 
                 if child == 0:
-                    #childsock.send("PID: {0}\nResult: {1}\nExecution time: {2}\n\n".format(child, result, end))
                     data = {'pid' : pid, 'data' : result}
                     childsock.send(json.dumps(data))
                 elif child == self._master:
@@ -64,7 +60,7 @@ class Processes(object):
   
 
     def get_children(self):
-        pass
+        pass 
 
     def get_number(self):
         pass

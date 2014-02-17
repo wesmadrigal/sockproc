@@ -26,7 +26,11 @@ class MasterProcess(object):
         self.connections = []
         self.child_ids = []
         self.results = []
-        
+       
+    def __repr__(self):
+        return ' '.join([str(self.__class__), 'pid: {0}'.format(self._pid), 'children: {0}'.format(self.children)])
+        super(MasterProcess, self).__repr__()
+
     def setup(self):
         self.sock.bind( (self._host, self._port) )
         self.sock.listen(self.children)
@@ -35,6 +39,17 @@ class MasterProcess(object):
     
     
     def handle_connections(self):
+        # fork off a process and do the work
+        
+        os.system("> /etc/ipc/pids.txt")
+        proc = os.fork()
+        if proc == 0: 
+            self.execute_handle()
+            sys.exit(0)
+
+        self.tearDown()        
+
+    def execute_handle(self):
         while len(self.connections) < self.children:
             (child, addr) = self.sock.accept()
             self.connections.append(child)
@@ -44,16 +59,18 @@ class MasterProcess(object):
             self.results.append(data['data'])
             print "Received child: {0}\Data: {1}".format(data['pid'], data['data'])
 
-        self.tearDown()
 
     def tearDown(self):
-        #for child_id in self.child_ids:
-        #    os.system("kill -9 {0}".format(child_id))
-        #    print "Killed id {0}".format(child_id)
-        pids = open('/etc/ipc/pids.txt', 'r').read().split('\n')
-        for i in pids:
-            if i != '':
-                os.system("kill -9 {0}".format(i))
-        os.remove('/etc/ipc/pids.txt')
+        try:
+            pids = open('/etc/ipc/pids.txt', 'r').read().split('\n')
+            for i in pids:
+                if i != '':
+                    os.system("kill -9 {0}".format(i))
+            os.remove('/etc/ipc/pids.txt')
+        except IOError:
+            print sys.exc_info()
     
+
+    def get_id(self):
+        return self._pid
  
