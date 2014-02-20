@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-<p>I wanted to explore some internal processs communication methods and that led to me just writing an entire master and slave parallelization package utilizing sockets as a communication mechanism between processes.  From what I've read, some of the techniques employed here are very similar to <a href="https://github.com/zeromq/pyzmq">Zero MQ</a>.  That being said, it has been enjoyable and ensightful to build.  Feel free to play around!</p>
+<p>I wanted to explore some internal processs communication methods and that led to me just writing an entire master and slave parallelization package utilizing sockets as a communication mechanism between processes.  From what I've read, some of the techniques employed here are very similar to <a href="https://github.com/zeromq/pyzmq">Zero MQ</a>.  That being said, it has been enjoyable and insightful to build.  Feel free to play around!</p>
 
 <br>
 <label>Example:<br>
