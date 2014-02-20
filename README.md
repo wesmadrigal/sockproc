@@ -6,22 +6,24 @@
 
 <br>
 <label>Example:<br>
-<code>from sockproc import serversock<br>
+<code>from sockproc.serversock import MasterProcess<br>
 </code>
 <b>
 <code># host and port for the master socket</code><br>
+<code># the port 8000 I used is arbitrary</code><br>
 <code>master = serversock.MasterProcess('127.0.0.1', 8000)</code><br>
 <code>master.setup()</code><br>
-<code>master.handle_connections()</code><br>
+<code>master.handle_processes()</code><br>
 </b>
 
 <br>
 <p>In a separate interpreter:
 <br>
 <b>
-<code>from sockproc import spawn</code><br>
-<code>procs = spawn.Processes(2, func, args)</code><br>
-<code>procs.run()</code>
+<code>from sockproc.spawn import Pool</code><br>
+<code># args are a tuple (arg1, arg2, arg3,)</code><br>
+<code>pool = Pool(2, func, args)</code><br>
+<code>pool.run()</code>
 </b>
 </body>
 </html>
