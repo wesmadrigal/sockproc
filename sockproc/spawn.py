@@ -34,7 +34,7 @@ class Pool(object):
                 
                 
                 if child != 0:
-                    sys.exit(0)
+                    continue
                 childsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 host, port = open('/etc/ipc/sock.txt', 'r').read().split('\n')
                 childsock.connect((host, int(port)))
@@ -53,7 +53,8 @@ class Pool(object):
                 else:
                     childsock.send("Not in child process {0}".format(child))
                      
-                sys.exit(0)
+                # kill yourself
+                os.system("kill -9 {0}".format(pid))
 
             except:
                 continue 

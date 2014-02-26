@@ -41,10 +41,6 @@ class MasterProcess(object):
         # fork off a process and do the work
         
         os.system("> /etc/ipc/pids.txt")
-        #proc = os.fork()
-        #if proc == 0: 
-        #    self.execute_handle()
-        #    sys.exit(0)
         self.execute_handle()
 
         self.tearDown()        
