@@ -17,11 +17,11 @@ def setup_parser():
     return parser
 
 class MasterProcess(object):
-    def __init__(self, host, port, limit=2, **kwargs):
+    def __init__(self, host, port, children=2, **kwargs):
         self._host = host
         self._port = port
         self._pid = os.getpid()
-        self.children = limit
+        self.children = children
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.connections = []
         self.child_ids = []
@@ -70,4 +70,13 @@ class MasterProcess(object):
 
     def get_id(self):
         return self._pid
- 
+
+
+    def reload(self, children=None):
+        self.child_ids = []
+        self.results = []
+        self.connections = []
+        if not children:
+            self.sock.listen( self.children ) 
+        else:
+            self.sock.listen( children )
